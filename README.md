@@ -60,11 +60,11 @@ The HomeDose AI API provides endpoints for managing family members, chats, and p
 ### Steps
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/sameededitz/humanify.git
+    git clone https://github.com/sameededitz/homedose-ai.git
     ```
 2. **Navigate to the project directory**:
     ```bash
-    cd humanify-admin-panel
+    cd homedose-ai
     ```
 3. **Install dependencies**:
     ```bash

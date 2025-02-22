@@ -15,11 +15,15 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/migrate', function () {
-    Artisan::call('migrate');
+    Artisan::call('migrate:fresh --seed');
     return 'Migrated';
 });
-Route::get('/optimize', function () {
+Route::get('/optimize-clear', function () {
     Artisan::call('optimize:clear');
+    return 'Cache Cleared';
+});
+Route::get('/optimize', function () {
+    Artisan::call('optimize');
     return 'Cache Cleared';
 });
 

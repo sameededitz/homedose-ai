@@ -3,10 +3,12 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\PurchaseController;
 use App\Http\Controllers\Api\SocialController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VerifyController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\FamilyMemberController;
 use App\Http\Controllers\OptionController;
+use App\Http\Controllers\UserFeedbackController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -18,15 +20,23 @@ Route::middleware('guest')->group(function () {
 
     Route::post('/auth/apple', [SocialController::class, 'apple'])->name('api.auth.apple');
 
+    Route::post('/email/resend-verification', [VerifyController::class, 'resend'])->name('api.verify.resend');
+
     Route::post('/reset-password', [VerifyController::class, 'sendResetLink'])->name('api.reset.password');
 });
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', [UserController::class, 'user'])->name('api.user');
+
+    Route::put('/user/update', [UserController::class, 'update'])->name('api.user.update');
+
     Route::post('/logout', [AuthController::class, 'logout'])->name('api.logout');
 
-    Route::post('/purchase', [PurchaseController::class, 'addPurchase'])->name('api.add.purchase');
+    Route::get('/purchase/active', [PurchaseController::class, 'active'])->name('api.plan.active');
 
-    Route::post('/purchase/status', [PurchaseController::class, 'Status'])->name('api.purchase');
+    Route::get('/purchase/history', [PurchaseController::class, 'history'])->name('api.plan.history');
+
+    Route::post('/purchase/add', [PurchaseController::class, 'addPurchase'])->name('api.add.purchase');
 
     Route::get('/chats', [ChatController::class, 'chats'])->name('api.chats');
 
@@ -49,6 +59,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/family/member/{familyMember}', [FamilyMemberController::class, 'destroy'])->name('api.family.member.destroy');
 });
 
-Route::post('/email/resend-verification', [VerifyController::class, 'resendVerify'])->name('api.verify.resend');
-
 Route::get('/options', [OptionController::class, 'getOptions'])->name('api.options');
+
+Route::post('/feedback/store', [UserFeedbackController::class, 'store'])->name('api.feedback.store');
