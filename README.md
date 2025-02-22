@@ -1,21 +1,51 @@
-# Humanify Admin Panel
+# HomeDose AI Admin Panel
 
-The **Humanify Admin Panel** is a lightweight and efficient administrative interface designed for managing user accounts and premium subscriptions. This tool is ideal for platforms requiring straightforward user and subscription management without unnecessary complexity.
+The **HomeDose AI Admin Panel** is a lightweight and efficient administrative interface designed for managing user accounts and purchases. This tool is ideal for platforms requiring straightforward user and purchase management without unnecessary complexity.
 
 ---
 
 ## Features
 
-### 👥 **User Management**
-- **Add Users**: Manually create new user accounts.
-- **Edit Users**: Update user details like name, email, or status.
-- **Deactivate/Activate Users**: Manage user access with a single toggle.
-- **Search & Filter**: Quickly locate users with advanced filtering options.
+### 👥 **Account Management**
+- **Add Accounts**: Manually create new user accounts.
+- **Edit Accounts**: Update user details like name, email, or status.
+- **Deactivate/Activate Accounts**: Manage user access with a single toggle.
+- **Search & Filter**: Quickly locate accounts with advanced filtering options.
 
-### 💎 **Premium Management**
-- **Manage Subscriptions**: Assign or revoke premium status for users.
-- **Subscription Status**: View and update the premium status of users.
-- **Track Premium Users**: Filter and monitor premium-only users.
+### 💳 **Purchase Management**
+- **Manage Purchases**: View and manage user purchases.
+- **Track Purchase History**: Monitor and review the history of user purchases.
+- **Refunds and Adjustments**: Process refunds or make adjustments to purchases.
+
+---
+
+## API
+
+The HomeDose AI API provides endpoints for managing family members, chats, and products. These endpoints allow for efficient integration and management of these modules.
+
+### **Family Member Module**
+
+- **List Family Members** \- get all family members.
+- **Get a Single Family Member** \- retrieve information about a specific family member by providing their `id`.
+- **Create a New Family Member** \- create a new family member by providing their details.
+- **Update an Existing Family Member** \- update the details of an existing family member by providing their `id` and the new details.
+- **Delete a Family Member** \- delete a family member by providing their `id`.
+
+### **Chat Module**
+
+- **List Chats** \- get all chats.
+- **Get a Single Chat** \- retrieve information about a specific chat by providing its `id`.
+- **Create a New Chat** \- create a new chat by providing the necessary details.
+- **Send a Message in a Chat** \- send a message in a specific chat by providing the chat `id` and the message details.
+- **Delete a Chat** \- delete a chat by providing its `id`.
+
+### **Product Module**
+
+- **List Products** \- get all products.
+- **Get a Single Product** \- retrieve information about a specific product by providing its `id`.
+- **Create a New Product** \- create a new product by providing the necessary details.
+- **Update an Existing Product** \- update the details of an existing product by providing its `id` and the new details.
+- **Delete a Product** \- delete a product by providing its `id`.
 
 ---
 
