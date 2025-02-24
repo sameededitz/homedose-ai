@@ -7,6 +7,7 @@ use App\Http\Controllers\PlanController;
 use App\Http\Controllers\UserFeedbackController;
 use App\Livewire\PlanAdd;
 use App\Livewire\PlanEdit;
+use App\Livewire\UserPurchases;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'verifyRole:admin']], function () {
@@ -23,6 +24,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'verifyR
     Route::delete('/plans/{plan:slug}', [PlanController::class, 'destroy'])->name('delete-plan');
 
     Route::get('/customers', [AdminController::class, 'AllUsers'])->name('all-users');
+    Route::get('/users/{userId}/manage', UserPurchases::class)->name('user-purchases');
     Route::delete('/delete-user/{user}', [AdminController::class, 'deleteUser'])->name('delete-user');
 
     Route::get('/options', [OptionController::class, 'Options'])->name('all-options');

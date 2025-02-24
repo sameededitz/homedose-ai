@@ -38,7 +38,7 @@ class FamilyMemberController extends Controller
             'name' => 'required|string|max:255',
             'gender' => 'required|in:male,female,other',
             'relationship' => 'required|string|max:255',
-            'message' => 'nullable|string',
+            'message' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:30720'
         ]);
 
