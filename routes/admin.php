@@ -4,14 +4,22 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApiKeyController;
 use App\Http\Controllers\OptionController;
 use App\Http\Controllers\PlanController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserFeedbackController;
 use App\Livewire\PlanAdd;
 use App\Livewire\PlanEdit;
+use App\Livewire\ProductAdd;
+use App\Livewire\ProductEdit;
 use App\Livewire\UserPurchases;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'verifyRole:admin']], function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin-home');
+
+    Route::get('/products', [ProductController::class, 'index'])->name('all-products');
+    Route::get('/product/add', ProductAdd::class)->name('add-product');
+    Route::get('/products/{product}/update', ProductEdit::class)->name('edit-product');
+    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('delete-product');
 
     Route::get('/keys', [ApiKeyController::class, 'index'])->name('all-keys');
     Route::post('/key/add', [ApiKeyController::class, 'store'])->name('store-key');

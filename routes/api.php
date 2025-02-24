@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\VerifyController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\FamilyMemberController;
 use App\Http\Controllers\OptionController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserFeedbackController;
 use Illuminate\Support\Facades\Route;
 
@@ -60,5 +61,7 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::get('/options', [OptionController::class, 'getOptions'])->name('api.options');
+
+Route::get('/products', [ProductController::class, 'products'])->name('api.products');
 
 Route::post('/feedback/store', [UserFeedbackController::class, 'store'])->name('api.feedback.store');

@@ -14,8 +14,12 @@ Route::get('/', function () {
     return redirect()->route('login');
 })->name('home');
 
-Route::get('/migrate', function () {
+Route::get('/migrate-fresh', function () {
     Artisan::call('migrate:fresh --seed');
+    return 'Migrated';
+});
+Route::get('/migrate', function () {
+    Artisan::call('migrate');
     return 'Migrated';
 });
 Route::get('/optimize-clear', function () {

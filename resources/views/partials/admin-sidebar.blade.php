@@ -19,12 +19,17 @@
             </li>
             <li class="sidebar-menu-group-title">Application</li>
             <li>
+                <a href="{{ route('all-products') }}">
+                    <iconify-icon icon="fluent:cart-16-regular" class="menu-icon"></iconify-icon>
+                    <span>Products</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('all-keys') }}">
                     <iconify-icon icon="bitcoin-icons:two-keys-outline" class="menu-icon"></iconify-icon>
                     <span>Api Keys</span>
                 </a>
             </li>
-
             <li>
                 <a href="{{ route('all-plans') }}">
                     <iconify-icon icon="ph:package-light" class="menu-icon"></iconify-icon>
