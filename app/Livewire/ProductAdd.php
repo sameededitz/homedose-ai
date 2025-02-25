@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Product;
+use Illuminate\Validation\Rules\File;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -23,7 +24,7 @@ class ProductAdd extends Component
     public function rules()
     {
         return [
-            'image' => 'required|image|mimes:jpg,png,jpeg|max:20480',
+            'image' => ['required', File::image()->types(['jpeg', 'jpg', 'png'])->max('20mb')],
             'name' => 'required|string|max:255',
             'link' => 'required|string|max:9999',
         ];
