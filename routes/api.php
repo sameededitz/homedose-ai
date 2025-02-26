@@ -39,22 +39,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/purchase/add', [PurchaseController::class, 'addPurchase'])->name('api.add.purchase');
 
-    Route::get('/chats', [ChatController::class, 'chats'])->name('api.chats');
-
-    Route::get('/chat/{chat}', [ChatController::class, 'show'])->name('api.chat.show');
-
-    Route::post('/chat/create', [ChatController::class, 'store'])->name('api.chat.create');
-
-    Route::post('/chat/{chat}/message', [ChatController::class, 'message'])->name('api.chat.message');
-
-    Route::delete('/chat/{chat}/delete', [ChatController::class, 'destroy'])->name('api.chat.destroy');
-
     Route::get('/family/members', [FamilyMemberController::class, 'members'])->name('api.family.members');
-
+    
     Route::get('/family/member/{familyMember}', [FamilyMemberController::class, 'show'])->name('api.family.member.show');
-
+    
     Route::post('/family/member', [FamilyMemberController::class, 'store'])->name('api.family.member.store');
 
+    Route::post('/family/{familyMember}/message', [FamilyMemberController::class, 'message'])->name('api.family.message');
+    
     Route::put('/family/member/{familyMember}', [FamilyMemberController::class, 'update'])->name('api.family.member.update');
 
     Route::delete('/family/member/{familyMember}', [FamilyMemberController::class, 'destroy'])->name('api.family.member.destroy');

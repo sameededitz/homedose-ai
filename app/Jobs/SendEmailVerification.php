@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Log;
 
 class SendEmailVerification implements ShouldQueue
 {
-    use Queueable, InteractsWithQueue, Queueable, SerializesModels;
+    use Queueable, InteractsWithQueue, SerializesModels;
 
     public $user;
 

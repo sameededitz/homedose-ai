@@ -8,7 +8,8 @@ class Chat extends Model
 {
     protected $fillable = [
         'user_id',
-        'title'
+        'title',
+        'family_member_id'
     ];
 
     public function messages()
@@ -19,5 +20,10 @@ class Chat extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    
+    public function familyMember()
+    {
+        return $this->belongsTo(FamilyMember::class);
     }
 }

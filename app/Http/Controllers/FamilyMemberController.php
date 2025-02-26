@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chat;
 use App\Models\FamilyMember;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,10 +27,21 @@ class FamilyMemberController extends Controller
     {
         Gate::authorize('view', $familyMember);
 
+        // Find the chat for this family member
+        $chat = $familyMember->chat;
+
+        if (!$chat) {
+            return response()->json([
+                'status' => false,
+                'message' => 'No chat found for this family member'
+            ], 404);
+        }
+
         return response()->json([
             'status' => true,
-            'family_member' => $familyMember
-        ], 200);
+            'family_member' => $familyMember,
+            'chat' => $chat->load('messages')
+        ]);
     }
 
     public function store(Request $request)
@@ -112,6 +124,14 @@ class FamilyMemberController extends Controller
     {
         Gate::authorize('delete', $familyMember);
 
+        if ($familyMember->chat) {
+            foreach ($familyMember->chat->messages as $message) {
+                $message->clearMediaCollection('image'); // Delete message images
+            }
+            $familyMember->chat->delete();
+        }
+
+        // Delete the family member
         $familyMember->clearMediaCollection('image');
         $familyMember->delete();
 
@@ -119,5 +139,54 @@ class FamilyMemberController extends Controller
             'status' => true,
             'message' => 'Family member deleted successfully'
         ], 200);
+    }
+
+    public function message(Request $request, FamilyMember $familyMember)
+    {
+        Gate::authorize('view', $familyMember);
+
+        $validator = Validator::make($request->all(), [
+            'message' => 'required|string|max:9999',
+            'sender' => 'required|in:ai,user',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:30720'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->all()
+            ], 400);
+        }
+
+        /** @var \App\Models\User $user **/
+        $user = Auth::user();
+
+        // Check if a chat exists for this family member; create one if not
+        $chat = $familyMember->chat ?? Chat::create([
+            'user_id' => $user->id,
+            'title' => $familyMember->name . "'s Chat",
+            'family_member_id' => $familyMember->id
+        ]);
+
+        Gate::authorize('view', $chat);
+
+        /** @var \App\Models\Message $message **/
+        $message = $chat->messages()->create([
+            'message' => $request->message,
+            'sender' => $request->sender,
+        ]);
+
+        if ($request->hasFile('image')) {
+            $message->clearMediaCollection('image');
+            $message->addMedia($request->file('image'))
+                ->usingFileName(time() . '_chat_' . $chat->id . '_message_' . $message->id . '.' . $request->file('image')->getClientOriginalExtension())
+                ->toMediaCollection('image');
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Message saved successfully',
+            'chat' => $chat->load('messages')
+        ], 201);
     }
 }

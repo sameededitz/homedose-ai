@@ -23,6 +23,11 @@ class FamilyMember extends Model implements HasMedia
         return $this->belongsTo(User::class);
     }
 
+    public function chat()
+    {
+        return $this->hasOne(Chat::class);
+    }
+
     protected $appends = ['image_url']; // Append image URL
 
     public function registerMediaCollections(): void
