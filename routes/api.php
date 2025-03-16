@@ -5,7 +5,6 @@ use App\Http\Controllers\Api\PurchaseController;
 use App\Http\Controllers\Api\SocialController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VerifyController;
-use App\Http\Controllers\ChatController;
 use App\Http\Controllers\FamilyMemberController;
 use App\Http\Controllers\OptionController;
 use App\Http\Controllers\ProductController;
@@ -30,6 +29,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [UserController::class, 'user'])->name('api.user');
 
     Route::put('/user/update', [UserController::class, 'update'])->name('api.user.update');
+
+    Route::post('/user/change-password', [UserController::class, 'changePassword'])->name('api.change.password');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('api.logout');
 
