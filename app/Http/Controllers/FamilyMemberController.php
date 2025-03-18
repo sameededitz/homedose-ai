@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Chat;
 use App\Models\FamilyMember;
 use Illuminate\Http\Request;
+use App\Http\Resources\ChatResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\FamilyMemberResource;
 
 class FamilyMemberController extends Controller
 {
@@ -19,7 +21,7 @@ class FamilyMemberController extends Controller
 
         return response()->json([
             'status' => true,
-            'family_members' => $familyMembers
+            'family_members' => FamilyMemberResource::collection($familyMembers),
         ], 200);
     }
 
@@ -39,8 +41,8 @@ class FamilyMemberController extends Controller
 
         return response()->json([
             'status' => true,
-            'family_member' => $familyMember,
-            'chat' => $chat->load('messages')
+            'family_member' => new FamilyMemberResource($familyMember),
+            'chat' => new ChatResource($chat),
         ]);
     }
 
@@ -81,7 +83,7 @@ class FamilyMemberController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Family member added successfully',
-            'family_member' => $familyMember
+            'family_member' => new FamilyMemberResource($familyMember)
         ], 201);
     }
 
@@ -116,7 +118,7 @@ class FamilyMemberController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Family member updated successfully',
-            'family_member' => $familyMember
+            'family_member' => new FamilyMemberResource($familyMember)
         ], 200);
     }
 
@@ -186,7 +188,7 @@ class FamilyMemberController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Message saved successfully',
-            'chat' => $chat->load('messages')
+            'chat' => new ChatResource($chat->load('messages')),
         ], 201);
     }
 }
