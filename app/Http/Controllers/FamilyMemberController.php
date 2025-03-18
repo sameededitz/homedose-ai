@@ -42,8 +42,8 @@ class FamilyMemberController extends Controller
         return response()->json([
             'status' => true,
             'family_member' => new FamilyMemberResource($familyMember),
-            'chat' => new ChatResource($chat),
-        ]);
+            'chat' => new ChatResource($chat->load('messages')),
+        ], 200);
     }
 
     public function store(Request $request)
