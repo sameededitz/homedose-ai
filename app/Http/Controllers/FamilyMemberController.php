@@ -165,6 +165,7 @@ class FamilyMemberController extends Controller
         $message = $chat->messages()->create([
             'message' => $request->message,
             'sender' => $request->sender,
+            'image_text' => $request->image_text,
         ]);
 
         return response()->json([
