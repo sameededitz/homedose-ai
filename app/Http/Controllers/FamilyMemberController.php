@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\FamilyMemberResource;
+use App\Http\Resources\MessageResource;
 
 class FamilyMemberController extends Controller
 {
@@ -165,7 +166,6 @@ class FamilyMemberController extends Controller
         $message = $chat->messages()->create([
             'message' => $request->message,
             'sender' => $request->sender,
-            'image_text' => $request->image_text,
         ]);
 
         if ($request->hasFile('image')) {
@@ -178,7 +178,7 @@ class FamilyMemberController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Message saved successfully',
-            'chat' => new ChatResource($chat->load('messages')),
+            'chat' => new MessageResource($message),
         ], 201);
     }
 }
