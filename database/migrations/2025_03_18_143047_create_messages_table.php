@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('chat_id')->constrained()->onDelete('cascade');
             $table->text('message');
             $table->enum('sender', ['ai', 'user'])->default('user');
+            $table->string('image_text')->nullable();
             $table->timestamps();
         });
     }
