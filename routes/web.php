@@ -16,7 +16,7 @@ Route::get('/', function () {
 
 Route::get('/migrate-fresh', function () {
     Artisan::call('migrate:fresh --seed');
-    return 'Migrated';
+    return 'Migrated and seeded';
 });
 Route::get('/migrate', function () {
     Artisan::call('migrate');
