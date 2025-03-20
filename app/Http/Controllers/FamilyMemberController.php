@@ -139,7 +139,7 @@ class FamilyMemberController extends Controller
         $validator = Validator::make($request->all(), [
             'message' => 'required|string|max:9999',
             'sender' => 'required|in:ai,user',
-            'image_text' => 'nullable|string|max:9999',
+            'image_text' => 'nullable|string',
         ]);
 
         if ($validator->fails()) {
