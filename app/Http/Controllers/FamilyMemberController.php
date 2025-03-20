@@ -139,7 +139,7 @@ class FamilyMemberController extends Controller
         $validator = Validator::make($request->all(), [
             'message' => 'required|string|max:9999',
             'sender' => 'required|in:ai,user',
-            'image_text' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:30720'
         ]);
 
         if ($validator->fails()) {
@@ -167,6 +167,13 @@ class FamilyMemberController extends Controller
             'sender' => $request->sender,
             'image_text' => $request->image_text,
         ]);
+
+        if ($request->hasFile('image')) {
+            $message->clearMediaCollection('image');
+            $message->addMedia($request->file('image'))
+                ->usingFileName(time() . '_chat_' . $chat->id . '_message_' . $message->id . '.' . $request->file('image')->getClientOriginalExtension())
+                ->toMediaCollection('image');
+        }
 
         return response()->json([
             'status' => true,

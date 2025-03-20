@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('messages', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('chat_id')->constrained()->onDelete('cascade');
-            $table->text('message');
-            $table->enum('sender', ['ai', 'user'])->default('user');
-            $table->timestamps();
+        Schema::table('messages', function (Blueprint $table) {
+            $table->dropColumn('image_text');
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('messages');
+        Schema::table('messages', function (Blueprint $table) {
+            $table->dropColumn('image_text');
+        });
     }
 };
