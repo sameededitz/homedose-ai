@@ -10,7 +10,7 @@ class Message extends Model implements HasMedia
 {
     use InteractsWithMedia;
 
-    protected $fillable = ['chat_id', 'message', 'sender'];
+    protected $fillable = ['chat_id', 'message', 'sender', 'image_text'];
 
     public function chat()
     {
