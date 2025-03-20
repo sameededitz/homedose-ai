@@ -29,20 +29,9 @@ class FamilyMemberController extends Controller
     {
         Gate::authorize('view', $familyMember);
 
-        // Find the chat for this family member
-        $chat = $familyMember->chat;
-
-        if (!$chat) {
-            return response()->json([
-                'status' => false,
-                'message' => 'No chat found for this family member'
-            ], 404);
-        }
-
         return response()->json([
             'status' => true,
-            'family_member' => new FamilyMemberResource($familyMember),
-            'chat' => new ChatResource($chat->load('messages')),
+            'family_member' => new FamilyMemberResource($familyMember->load('chat.messages')),
         ], 200);
     }
 
