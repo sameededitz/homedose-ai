@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Jobs\SendEmailVerification;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Jobs\SendPasswordReset;
+use App\Jobs\SendEmailVerification;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
 
@@ -19,8 +20,8 @@ class VerifyController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-            'status' => false,
-            'message' => $validator->errors()->all()
+                'status' => false,
+                'message' => $validator->errors()->all()
             ], 400);
         }
 
@@ -29,15 +30,15 @@ class VerifyController extends Controller
 
         if (!$user) {
             return response()->json([
-            'status' => false,
-            'message' => 'User not found'
+                'status' => false,
+                'message' => 'User not found'
             ], 404);
         }
 
         if ($user->hasVerifiedEmail()) {
             return response()->json([
-            'status' => true,
-            'message' => 'Email already Verified'
+                'status' => true,
+                'message' => 'Email already Verified'
             ], 200);
         }
 
@@ -62,20 +63,22 @@ class VerifyController extends Controller
             ], 400);
         }
 
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
+        $user = User::where('email', $request->email)->first();
 
-        if ($status == Password::RESET_LINK_SENT) {
-            return response()->json([
-                'status' => true,
-                'message' => 'Password reset link sent. Please check your email.'
-            ], 200);
-        } else {
+        if (!$user) {
             return response()->json([
                 'status' => false,
-                'message' => __($status)
+                'message' => 'Email not found!'
             ], 400);
         }
+
+        $token = Password::createToken($user);
+
+        SendPasswordReset::dispatch($user, $token)->delay(now()->addSeconds(5));
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Password reset link sent. Please check your Inbox.'
+        ], 200);
     }
 }

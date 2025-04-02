@@ -15,7 +15,6 @@
         <!-- Navbar -->
         <div class="navbar"
             style="background-color: #007bff; padding: 10px 20px; border-radius: 8px 8px 0 0; display: flex; justify-content: space-between; align-items: center;">
-            <img src="{{ config('app.logo') ?? '#' }}" alt="Logo" style="width: 80px;">
             <div>
                 <a href="#" style="color: white; text-decoration: none; margin: 0 10px;">Home</a>
                 <a href="#" style="color: white; text-decoration: none; margin: 0 10px;">Help</a>
