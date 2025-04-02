@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Jobs\SendWelcomeEmail;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Auth\Events\Verified;
 
 class SendWelcomeEmailListener
@@ -21,8 +22,9 @@ class SendWelcomeEmailListener
     public function handle(Verified $event): void
     {
         $user = $event->user;
+        Log::info("Dispatching Welcome Email Job for: " . $user->email);
         if ($user->hasVerifiedEmail()) {
-            SendWelcomeEmail::dispatch($user)->delay(now()->addMinutes(1));
+            SendWelcomeEmail::dispatch($user)->delay(now()->addSeconds(5));
         }
     }
 }

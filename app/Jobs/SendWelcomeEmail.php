@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use Throwable;
 use App\Mail\WelcomeMail;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Queue\SerializesModels;
@@ -11,7 +12,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendWelcomeEmail implements ShouldQueue
+class SendWelcomeEmail implements ShouldQueue, ShouldBeUnique
 {
     use Queueable, InteractsWithQueue, SerializesModels;
 

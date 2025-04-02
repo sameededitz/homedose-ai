@@ -2,10 +2,8 @@
 
 namespace App\Providers;
 
-use App\Listeners\SendWelcomeEmailListener;
 use App\Listeners\UpdateLastLogin;
 use Illuminate\Auth\Events\Login;
-use Illuminate\Auth\Events\Verified;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
@@ -32,17 +30,8 @@ class AppServiceProvider extends ServiceProvider
             UpdateLastLogin::class
         );
 
-        Event::listen(
-            Verified::class,
-            SendWelcomeEmailListener::class
-        );
-
         Event::listen(function (\SocialiteProviders\Manager\SocialiteWasCalled $event) {
             $event->extendSocialite('apple', \SocialiteProviders\Apple\Provider::class);
-        });
-
-        RateLimiter::for('login-user', function (Request $request) {
-            return Limit::perMinute(5)->by($request->email . $request->ip());
         });
     }
 }
