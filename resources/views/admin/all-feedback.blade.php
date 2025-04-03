@@ -33,6 +33,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Email</th>
                         <th scope="col">Subject</th>
+                        <th scope="col">Rating</th>
                         <th scope="col">Message</th>
                         <th scope="col">Created</th>
                         <th scope="col">Action</th>
@@ -44,6 +45,7 @@
                             <td><a href="javascript:void(0)" class="text-primary-600"> {{ $loop->iteration }} </a></td>
                             <td>{{ $feedback->email }}</td>
                             <td>{{ $feedback->subject }}</td>
+                            <td>{{ $feedback->rating }}</td>
                             <td>{{ Str::limit($feedback->message, 10) }}</td>
                             <td>
                                 C:{{ $feedback->created_at->diffForHumans() }}

@@ -27,6 +27,7 @@ class UserFeedbackController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'subject' => 'required|string|max:255',
+            'rating' => 'required|numeric|min:1|max:5',
             'message' => 'required|string|max:1000',
         ]);
 
@@ -40,6 +41,7 @@ class UserFeedbackController extends Controller
         $feedback = UserFeedback::create($request->only([
             'email',
             'subject',
+            'rating',
             'message',
         ]));
 
