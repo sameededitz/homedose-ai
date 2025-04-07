@@ -26,7 +26,6 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255|min:3',
-            'email' => 'required|email|unique:users,email,' . Auth::id(),
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg|max:20420',
         ]);
 
@@ -41,7 +40,6 @@ class UserController extends Controller
         /** @var \App\Models\User $user **/
         $user->update([
             'name' => $request->name,
-            'email' => $request->email,
         ]);
 
         if ($request->hasFile('avatar')) {
