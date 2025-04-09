@@ -54,12 +54,14 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
 
     public function getAvatarUrlAttribute()
     {
+        $media = $this->getFirstMedia('avatar');
+        if ($media) {
+            return $media->getUrl();
+        }
+        // Fallback to default avatar URL if no media is found
         if ($this->avatar) {
             return $this->avatar;
         }
-
-        $media = $this->getFirstMedia('avatar');
-        return $media ? $media->getUrl() : null;
     }
 
     public function sendEmailVerificationNotification()
