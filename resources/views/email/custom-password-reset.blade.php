@@ -14,23 +14,22 @@
         style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); padding: 20px;">
         <!-- Navbar -->
         <div class="navbar"
-            style="background-color: #007bff; padding: 10px 20px; border-radius: 8px 8px 0 0; display: flex; justify-content: center; align-items: center;">
-            <div>
-                <a href="#" style="color: white; text-decoration: none; margin: 0 10px;">Home</a>
-                <a href="#" style="color: white; text-decoration: none; margin: 0 10px;">Help</a>
-            </div>
+            style="background-color: #66C6BA; padding: 10px 20px; border-radius: 8px 8px 0 0; display: flex; justify-content: center; align-items: center;">
         </div>
 
-        <div class="header" style="background-color: #007bff; color: white; text-align: center; padding: 20px 0;">
+        <div class="header" style="background-color: #66C6BA; color: white; text-align: center; padding: 20px 0;">
             <h1 style="margin: 0; font-size: 24px;">Password Reset</h1>
         </div>
 
         <div class="content" style="padding: 20px;">
+            <div class="logo" style="text-align: center;">
+                <img src="{{ asset('admin_assets/images/logo.png') }}" alt="Logo" style="width: 100px; height: auto;" />
+            </div>
             <h2 style="margin: 15px 0; text-align: center;">Password Reset Request</h2>
             <p>Dear {{ $user->name ?? 'User' }},</p>
             <p>We received a request to reset your password. Please click the button below to reset your password:</p>
             <p><a href="{{ $resetUrl ?? '#' }}"
-                    style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Reset
+                    style="display: inline-block; padding: 10px 20px; background-color: #66C6BA; color: white; text-decoration: none; border-radius: 5px;">Reset
                     Password</a></p>
             <p>If you did not request a password reset, no further action is required.</p>
             <p>Best regards,</p>
@@ -42,21 +41,6 @@
         </div>
 
         <!-- Bottom Bar -->
-        <div class="bottom-bar"
-            style="text-align: center; padding: 20px; background-color: #f1f1f1; border-radius: 0 0 8px 8px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center;">
-            <div>
-                <a href="#" style="color: #007bff; text-decoration: none; margin-right: 10px;">Terms of
-                    Service</a>
-                <a href="#" style="color: #007bff; text-decoration: none;">Privacy Policy</a>
-            </div>
-            @if (isset($viewInBrowserUrl))
-                <div>
-                    <a href="{{ $viewInBrowserUrl ?? '#' }}"
-                        style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">View
-                        in Browser</a>
-                </div>
-            @endif
-        </div>
     </div>
 </body>
 

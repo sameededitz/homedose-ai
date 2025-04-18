@@ -12,11 +12,14 @@
     <div class="container"
         style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); padding: 20px;">
 
-        <div class="header" style="background-color: #007bff; color: white; text-align: center; padding: 20px 0;">
+        <div class="header" style="background-color: #66C6BA; color: white; text-align: center; padding: 20px 0;">
             <h1 style="margin: 0; font-size: 24px;">Welcome to {{ config('app.name') }}!</h1>
         </div>
 
         <div class="content" style="padding: 20px;">
+            <div class="logo" style="text-align: center;">
+                <img src="{{ asset('admin_assets/images/logo.png') }}" alt="Logo" style="width: 100px; height: auto;" />
+            </div>
             <h2 style="margin: 15px 0; text-align: center;">Hello {{ $user->name ?? 'User' }}!</h2>
             <p>We’re thrilled to have you on board. 🎉</p>
             <p>Feel free to explore and make the most out of our platform.</p>
