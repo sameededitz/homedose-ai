@@ -12,7 +12,7 @@ class HelpRequestController extends Controller
     {
         $feedbacks = HelpRequest::latest()->get();
 
-        return view('admin.all-feedback', compact('feedbacks'));
+        return view('admin.all-help', compact('feedbacks'));
     }
 
     public function view(HelpRequest $feedback)
