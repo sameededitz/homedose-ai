@@ -60,4 +60,4 @@ Route::get('/products', [ProductController::class, 'products'])->name('api.produ
 
 Route::post('/feedback/store', [UserFeedbackController::class, 'store'])->name('api.feedback.store');
 
-Route::get('/help/request', [HelpRequestController::class, 'store'])->name('api.help');
+Route::post('/help/request', [HelpRequestController::class, 'store'])->name('api.help');
