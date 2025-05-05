@@ -12,9 +12,10 @@
                     <x-alert type="info" :message="session('status')" />
                 @endif
                 <div>
-                    <a href="index.html" class="mb-40 max-w-290-px">
-                        <img src="{{ asset('admin_assets/images/logo.png') }}" alt="">
-                    </a>
+                    <div class="mb-40 d-flex align-items-center max-w-290-px">
+                        <img src="{{ asset('admin_assets/images/logo.png') }}" width="80px" alt="">
+                        <h3 class="text-2xl text-dark"> {{ config('app.name') }} </h3>
+                    </div>
                     <h4 class="mb-12">Sign In to your Account</h4>
                     <p class="mb-32 text-secondary-light text-lg">Welcome back! please enter your detail</p>
                 </div>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApiKeyController;
+use App\Http\Controllers\HelpRequestController;
 use App\Http\Controllers\OptionController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ProductController;
@@ -42,9 +43,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'verifyR
     Route::get('/feedbacks/{feedback}', [UserFeedbackController::class, 'view'])->name('edit-feedback');
     Route::delete('/feedbacks/{feedback}', [UserFeedbackController::class, 'destroy'])->name('delete-feedback');
 
-    Route::get('/help/requests', [UserFeedbackController::class, 'feedbacks'])->name('all-help-requests');
-    Route::get('/help/requests/{feedback}', [UserFeedbackController::class, 'view'])->name('edit-help-request');
-    Route::delete('/help/request/{feedback}', [UserFeedbackController::class, 'destroy'])->name('delete-help-request');
+    Route::get('/help/requests', [HelpRequestController::class, 'feedbacks'])->name('all-help-requests');
+    Route::get('/help/requests/{feedback}', [HelpRequestController::class, 'view'])->name('edit-help-request');
+    Route::delete('/help/request/{feedback}', [HelpRequestController::class, 'destroy'])->name('delete-help-request');
 
     Route::get('/adminUsers', [AdminController::class, 'allAdmins'])->name('all-admins');
 
