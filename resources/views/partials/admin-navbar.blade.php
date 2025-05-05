@@ -17,8 +17,6 @@
         </div>
         <div class="col-auto">
             <div class="d-flex flex-wrap align-items-center gap-3">
-                <button type="button" data-theme-toggle
-                    class="w-40-px h-40-px bg-neutral-200 rounded-circle d-flex justify-content-center align-items-center"></button>
                 <button type="button"
                     class="w-40-px h-40-px bg-neutral-200 rounded-circle d-flex justify-content-center align-items-center"
                     data-bs-toggle="modal" data-bs-target="#changePasswordModal">
@@ -28,7 +26,7 @@
                 <div class="dropdown">
                     <button class="d-flex justify-content-center align-items-center rounded-circle" type="button"
                         data-bs-toggle="dropdown">
-                        <img src="{{ asset('admin_assets/images/user.png') }}" alt="image"
+                        <img src="{{ asset('admin_assets/images/logo.png') }}" alt="image"
                             class="w-40-px h-40-px object-fit-cover rounded-circle">
                     </button>
                     <div class="dropdown-menu to-top dropdown-menu-sm">
@@ -43,25 +41,6 @@
                             </button>
                         </div>
                         <ul class="to-top-list">
-                            <li>
-                                <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3"
-                                    href="view-profile.html">
-                                    <iconify-icon icon="solar:user-linear" class="icon text-xl"></iconify-icon> My
-                                    Profile</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3"
-                                    href="email.html">
-                                    <iconify-icon icon="tabler:message-check" class="icon text-xl"></iconify-icon>
-                                    Inbox</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3"
-                                    href="company.html">
-                                    <iconify-icon icon="icon-park-outline:setting-two"
-                                        class="icon text-xl"></iconify-icon>
-                                    Setting</a>
-                            </li>
                             <li>
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf

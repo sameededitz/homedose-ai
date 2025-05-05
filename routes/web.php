@@ -50,12 +50,3 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/admin.php';
-
-Route::get('/send-test-email', function () {
-    \Illuminate\Support\Facades\Mail::raw('This is a test email', function ($message) {
-        $message->to('sameedhassan22@gmail.com')
-            ->subject('Test Email');
-    });
-
-    return 'Test email sent';
-});
