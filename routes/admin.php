@@ -42,6 +42,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'verifyR
     Route::get('/feedbacks/{feedback}', [UserFeedbackController::class, 'view'])->name('edit-feedback');
     Route::delete('/feedbacks/{feedback}', [UserFeedbackController::class, 'destroy'])->name('delete-feedback');
 
+    Route::get('/help/requests', [UserFeedbackController::class, 'feedbacks'])->name('all-help-requests');
+    Route::get('/help/requests/{feedback}', [UserFeedbackController::class, 'view'])->name('edit-help-request');
+    Route::delete('/help/request/{feedback}', [UserFeedbackController::class, 'destroy'])->name('delete-help-request');
+
     Route::get('/adminUsers', [AdminController::class, 'allAdmins'])->name('all-admins');
 
     Route::get('/signup', [AdminController::class, 'addAdmin'])->name('add-admin');

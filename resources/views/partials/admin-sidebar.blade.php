@@ -43,6 +43,12 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('all-help-requests') }}">
+                    <iconify-icon icon="material-symbols:feedback-outline-rounded" class="menu-icon"></iconify-icon>
+                    <span>Help Requests</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('all-users') }}">
                     <iconify-icon icon="ri:user-line" class="menu-icon"></iconify-icon>
                     <span>Manage Users</span>

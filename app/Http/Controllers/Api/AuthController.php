@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Jobs\SendEmailVerification;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -49,7 +50,7 @@ class AuthController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'User created successfully! Verify your Email',
-            'user' => $user,
+            'user' => new UserResource($user),
         ], 201);
     }
 
@@ -76,6 +77,14 @@ class AuthController extends Controller
             ], 400);
         }
 
+        if (!$user->hasVerifiedEmail()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Please verify your email address.',
+                'user' => new UserResource($user),
+            ], 400);
+        }
+
         $credentials = [
             $loginType => $request->name,
             'password' => $request->password,
@@ -86,20 +95,12 @@ class AuthController extends Controller
             /** @var \App\Models\User $user **/
             $user = Auth::user();
 
-            if (!$user->hasVerifiedEmail()) {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Please verify your email address.',
-                    'user' => $user
-                ], 400);
-            }
-
             $token = $user->createToken('auth_token')->plainTextToken;
 
             return response()->json([
                 'status' => true,
                 'message' => 'User logged in successfully!',
-                'user' => $user,
+                'user' => new UserResource($user),
                 'access_token' => $token,
                 'token_type' => 'Bearer',
             ], 200);

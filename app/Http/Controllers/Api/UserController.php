@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,14 +19,18 @@ class UserController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'User fetched successfully!',
-            'user' => $user,
+            'user' => new UserResource($user),
         ], 200);
     }
 
     public function update(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255|min:3',
+            'username' => 'required|string|max:255|min:3',
+            'first_name' => 'nullable|string|max:255',
+            'last_name' => 'nullable|string|max:255',
+            'gender' => 'nullable|string|in:male,female,other',
+            'birth_date' => 'nullable|date_format:Y-m-d',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg|max:20420',
         ]);
 
@@ -39,7 +44,7 @@ class UserController extends Controller
         $user = Auth::user();
         /** @var \App\Models\User $user **/
         $user->update([
-            'name' => $request->name,
+            'name' => $request->username,
         ]);
 
         if ($request->hasFile('avatar')) {
@@ -52,7 +57,7 @@ class UserController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'User updated successfully!',
-            'user' => $user,
+            'user' => new UserResource($user),
         ], 200);
     }
 

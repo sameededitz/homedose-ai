@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('messages', function (Blueprint $table) {
-            $table->dropColumn('image_text');
+        Schema::create('help_requests', function (Blueprint $table) {
+            $table->id();
+            $table->string('email');
+            $table->string('subject');
+            $table->text('message');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('messages', function (Blueprint $table) {
-            $table->dropColumn('image_text');
-        });
+        Schema::dropIfExists('help_requests');
     }
 };

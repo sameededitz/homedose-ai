@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\SocialController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VerifyController;
 use App\Http\Controllers\FamilyMemberController;
+use App\Http\Controllers\HelpRequestController;
 use App\Http\Controllers\OptionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserFeedbackController;
@@ -41,13 +42,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/purchase/add', [PurchaseController::class, 'addPurchase'])->name('api.add.purchase');
 
     Route::get('/family/members', [FamilyMemberController::class, 'members'])->name('api.family.members');
-    
+
     Route::get('/family/member/{familyMember}', [FamilyMemberController::class, 'show'])->name('api.family.member.show');
-    
+
     Route::post('/family/member', [FamilyMemberController::class, 'store'])->name('api.family.member.store');
 
     Route::post('/family/{familyMember}/message', [FamilyMemberController::class, 'message'])->name('api.family.message');
-    
+
     Route::put('/family/member/{familyMember}', [FamilyMemberController::class, 'update'])->name('api.family.member.update');
 
     Route::delete('/family/member/{familyMember}', [FamilyMemberController::class, 'destroy'])->name('api.family.member.destroy');
@@ -58,3 +59,5 @@ Route::get('/options', [OptionController::class, 'getOptions'])->name('api.optio
 Route::get('/products', [ProductController::class, 'products'])->name('api.products');
 
 Route::post('/feedback/store', [UserFeedbackController::class, 'store'])->name('api.feedback.store');
+
+Route::get('/help/request', [HelpRequestController::class, 'store'])->name('api.help');
